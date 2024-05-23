@@ -59,7 +59,7 @@ export async function GET(request) {
               {secondaryHeading}
             </div>
 
-            <div
+            {/* <div
               style={{
                 marginTop: "10px",
                 fontSize: "70px",
@@ -81,17 +81,17 @@ export async function GET(request) {
               }}
             >
               {description}
-            </div>
+            </div> */}
           </div>
 
-          <img
+          {/* <img
             src={waterMarkImage}
             alt="bgimage"
             style={{
               width: "150px",
               opacity: "0.1",
             }}
-          />
+          /> */}
         </div>
       </div>
     ),
