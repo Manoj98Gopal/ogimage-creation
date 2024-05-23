@@ -59,7 +59,7 @@ export async function GET(request) {
               {secondaryHeading}
             </div>
 
-            {/* <div
+            <div
               style={{
                 marginTop: "10px",
                 fontSize: "70px",
@@ -81,7 +81,7 @@ export async function GET(request) {
               }}
             >
               {description}
-            </div> */}
+            </div>
           </div>
 
           {/* <img
