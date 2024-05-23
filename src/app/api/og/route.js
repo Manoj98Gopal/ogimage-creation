@@ -1,6 +1,6 @@
 import { ImageResponse } from "@vercel/og";
 
-export const runtime = "edge"
+export const runtime = "edge";
 
 export async function GET(request) {
   return new ImageResponse(
@@ -22,8 +22,8 @@ export async function GET(request) {
       </div>
     ),
     {
-      width: 1200,
-      height: 630,
+      width: 800,
+      height: 555,
     }
   );
 }
