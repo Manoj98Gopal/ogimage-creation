@@ -84,14 +84,14 @@ export async function GET(request) {
             </div>
           </div>
 
-          {/* <img
+          <img
             src={waterMarkImage}
             alt="bgimage"
             style={{
               width: "150px",
               opacity: "0.1",
             }}
-          /> */}
+          />
         </div>
       </div>
     ),
