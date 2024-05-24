@@ -6,7 +6,7 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url);
 
   const secondaryHeading = searchParams.get("heading");
-  const primaryHeading = searchParams.get("subHeadin");
+  const primaryHeading = searchParams.get("subHeading");
   const description = searchParams.get("description");
   const waterMarkImage = searchParams.get("bgImage");
 
@@ -17,87 +17,92 @@ export async function GET(request) {
     (
       <div
         style={{
-          width: "100%",
-          height: "100%",
           display: "flex",
-          gap: "2px",
+          height: "100%",
+          width: "100%",
+          // background: "linear-gradient(117deg, #FFECE2 -14.36%, #E7F4FF 52.04%, #F0CBF9 119.72%)",
+          backgroundImage:
+            "linear-gradient(135deg,#f9f5f3,#f3f6f9 51%,#f8f3f9)",
+          padding: "30px 30px",
           flexDirection: "column",
-          background:
-            "linear-gradient(117deg, #FFECE2 -14.36%, #E7F4FF 52.04%, #F0CBF9 119.72%)",
-          padding: "25px",
+          gap: "20px",
         }}
       >
-        <img src={KALIBRE_FULL_NAME} alt="logo" width="100px" />
+        <div style={{ display: "flex" }}>
+          <img src={KALIBRE_FULL_NAME} alt="logo" width="130px" />
+        </div>
 
         <div
           style={{
             display: "flex",
-            gap: "20px",
-            alignItems: "center",
+            gap: "10px",
+            alignItems: "flex-start",
             justifyContent: "space-between",
-            marginTop: "15px",
             flexWrap: "nowrap",
+            marginTop: "40px",
           }}
         >
           <div
             style={{
               display: "flex",
               flexDirection: "column",
-              gap: "15px",
-              flex: "0 1 80%",
+              flex: "0 1 70%",
             }}
           >
-            <div
-              style={{
-                marginTop: "40px",
-                fontSize: "24px",
-                fontWeight: 600,
-                color: "#3478F6",
-                textTransform: "uppercase",
-              }}
-            >
-              {secondaryHeading}
-            </div>
+            {secondaryHeading && (
+              <h1 style={{ color: "#3478F6", fontWeight: 500 }}>
+                {secondaryHeading}
+              </h1>
+            )}
 
-            <div
-              style={{
-                marginTop: "10px",
-                fontSize: "70px",
-                fontWeight: 500,
-                color: "#1D1D1D",
-                textWrap: "warap",
-                textShadow: "-2.312px 4.623px 9.593px rgba(0, 0, 0, 0.25)",
-              }}
-            >
-              {primaryHeading}
-            </div>
+            {primaryHeading && (
+              <h1
+                style={{
+                  marginTop: "10px",
+                  fontSize: "3.5rem",
+                  fontWeight: 600,
+                  color: "#1D1D1D",
+                  textWrap: "warap",
+                  textShadow: "-3px 4px 5px #C4C4C4",
+                  lineHeight: "4rem",
+                }}
+              >
+                {primaryHeading}
+              </h1>
+            )}
 
-            <div
-              style={{
-                marginTop: "20px",
-                fontSize: "18px",
-                fontWeight: 500,
-                color: "#1D1D1D",
-              }}
-            >
-              {description}
-            </div>
+            {description && (
+              <p
+                style={{
+                  fontSize: "1rem",
+                  color: "#1D1D1D",
+                  fontWeight: 400,
+                  lineHeight: "1.5",
+                }}
+              >
+                {description}
+              </p>
+            )}
           </div>
 
-          <img
-            src={waterMarkImage}
-            alt="bgimage"
-            style={{
-              width: "150px",
-              opacity: "0.1",
-            }}
-          />
+          {waterMarkImage && (
+            <div style={{ display: "flex" }}>
+              <img
+                src={waterMarkImage}
+                alt="logo"
+                width="180px"
+                style={{
+                  opacity: "0.1",
+                }}
+              />
+            </div>
+          )}
         </div>
       </div>
     ),
     {
       width: 800,
-      height: 782,
+      height: 558,
     }
   );
 }
