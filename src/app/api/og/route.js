@@ -60,7 +60,7 @@ export async function GET(request) {
                 style={{
                   marginTop: "10px",
                   fontSize: "3.5rem",
-                  fontWeight: 600,
+                  fontWeight: 700,
                   color: "#1D1D1D",
                   textWrap: "warap",
                   textShadow: "-3px 4px 5px #C4C4C4",
