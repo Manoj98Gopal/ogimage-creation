@@ -56,7 +56,7 @@ export async function GET(request) {
             )}
 
             {primaryHeading && (
-              <h1
+              <div
                 style={{
                   marginTop: "10px",
                   fontSize: "3.5rem",
@@ -68,7 +68,7 @@ export async function GET(request) {
                 }}
               >
                 {primaryHeading}
-              </h1>
+              </div>
             )}
 
             {description && (
