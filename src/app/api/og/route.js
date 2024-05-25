@@ -1,9 +1,13 @@
 import { ImageResponse } from "@vercel/og";
-
 export const runtime = "edge";
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
+
+  const size = {
+    width: 800,
+    height: 558,
+  };
 
   const secondaryHeading = searchParams.get("heading");
   const primaryHeading = searchParams.get("subHeading");
@@ -13,6 +17,22 @@ export async function GET(request) {
   const KALIBRE_FULL_NAME =
     "https://res.cloudinary.com/kalibre-ai/image/upload/v1715771480/icons/kalibre_logo_k41tiq.svg";
 
+  const Arrow_Icon =
+    "https://res.cloudinary.com/kalibre-ai/image/upload/v1716619650/icons/Arrow_03_e0di3w.svg";
+
+  const samiBold = await fetch(
+    new URL("../../../assets/FamiljenGrotesk-SemiBold.ttf", import.meta.url)
+  ).then((res) => res.arrayBuffer());
+
+  const regular = await fetch(
+    new URL("../../../assets/Gordita Regular.otf", import.meta.url)
+  ).then((res) => res.arrayBuffer());
+
+  const fontMedium = await fetch(
+    new URL("../../../assets/Inter-Medium .otf", import.meta.url)
+  ).then((res) => res.arrayBuffer());
+
+  // try {
   return new ImageResponse(
     (
       <div
@@ -20,10 +40,10 @@ export async function GET(request) {
           display: "flex",
           height: "100%",
           width: "100%",
-          // background: "linear-gradient(117deg, #FFECE2 -14.36%, #E7F4FF 52.04%, #F0CBF9 119.72%)",
+          // backgroundImage: "linear-gradient(117deg, #FFECE2 -14.36%, #E7F4FF 52.04%, #F0CBF9 119.72%)",
           backgroundImage:
-            "linear-gradient(135deg,#f9f5f3,#f3f6f9 51%,#f8f3f9)",
-          padding: "30px 30px",
+            "linear-gradient(135deg, #fef5f1, #f0f8ff 48%, #faedfd)",
+          padding: "30px 35px",
           flexDirection: "column",
           gap: "20px",
         }}
@@ -46,11 +66,13 @@ export async function GET(request) {
             style={{
               display: "flex",
               flexDirection: "column",
-              flex: "0 1 70%",
+              flex: "0 1 65%",
+              fontFamily: "meduim",
+              // gap: "5px",
             }}
           >
             {secondaryHeading && (
-              <h1 style={{ color: "#3478F6", fontWeight: 500 }}>
+              <h1 style={{ color: "#669AFB", fontWeight: 500 }}>
                 {secondaryHeading}
               </h1>
             )}
@@ -58,14 +80,16 @@ export async function GET(request) {
             {primaryHeading && (
               <div
                 style={{
-                  marginTop: "10px",
                   fontSize: "3.5rem",
-                  fontWeight: 700,
-                  color: "#1D1D1D",
+                  fontWeight: 600,
+                  color: "#222222",
                   textWrap: "warap",
                   textShadow: "-3px 4px 5px #C4C4C4",
-                  lineHeight: "4rem",
+                  lineHeight: "3.6rem",
+                  fontFamily: "samibold",
+                  marginTop: "5px",
                 }}
+                // tw="text-6xl font-black"
               >
                 {primaryHeading}
               </div>
@@ -74,10 +98,12 @@ export async function GET(request) {
             {description && (
               <p
                 style={{
-                  fontSize: "1rem",
-                  color: "#1D1D1D",
+                  fontSize: "1.3rem",
+                  color: "#717171",
                   fontWeight: 400,
-                  lineHeight: "1.5",
+                  lineHeight: "1.7",
+                  fontFamily: "meduim",
+                  marginTop: "35px",
                 }}
               >
                 {description}
@@ -86,13 +112,29 @@ export async function GET(request) {
           </div>
 
           {waterMarkImage && (
-            <div style={{ display: "flex" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                gap: "60px",
+              }}
+            >
               <img
                 src={waterMarkImage}
                 alt="logo"
                 width="180px"
                 style={{
-                  opacity: "0.1",
+                  opacity: "0.13",
+                }}
+              />
+              <img
+                src={Arrow_Icon}
+                alt="logo"
+                width="120px"
+                style={{
+                  opacity: "0.07",
+                  marginTop: "40px",
                 }}
               />
             </div>
@@ -101,8 +143,27 @@ export async function GET(request) {
       </div>
     ),
     {
-      width: 800,
-      height: 558,
+      ...size,
+      fonts: [
+        {
+          name: "samibold",
+          data: samiBold,
+          style: "normal",
+        },
+        {
+          name: "meduim",
+          data: fontMedium,
+          style: "normal",
+        },
+        {
+          name: "regular",
+          data: regular,
+          style: "normal",
+        },
+      ],
     }
   );
+  // } catch (error) {
+  //   console.log("error ===", error);
+  // }
 }
