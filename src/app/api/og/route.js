@@ -2,15 +2,12 @@ import { ImageResponse } from "@vercel/og";
 export const runtime = "edge";
 
 const b = await fetch(
-  new URL("../../../assets/FamiljenGrotesk-SemiBold.ttf", import.meta.url)
+  new URL("../../../../assets/FamiljenGrotesk-SemiBold.ttf", import.meta.url)
 ).then((res) => res.arrayBuffer());
 
-const r = await fetch(
-  new URL("../../../assets/Gordita Regular.otf", import.meta.url)
-).then((res) => res.arrayBuffer());
 
 const m = await fetch(
-  new URL("../../../assets/Inter-Medium .otf", import.meta.url)
+  new URL("../../../../assets/Inter-Medium .otf", import.meta.url)
 ).then((res) => res.arrayBuffer());
 
 export async function GET(request) {
