@@ -1,6 +1,18 @@
 import { ImageResponse } from "@vercel/og";
 export const runtime = "edge";
 
+const b = await fetch(
+  new URL("../../../assets/FamiljenGrotesk-SemiBold.ttf", import.meta.url)
+).then((res) => res.arrayBuffer());
+
+const r = await fetch(
+  new URL("../../../assets/Gordita Regular.otf", import.meta.url)
+).then((res) => res.arrayBuffer());
+
+const m = await fetch(
+  new URL("../../../assets/Inter-Medium .otf", import.meta.url)
+).then((res) => res.arrayBuffer());
+
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
 
@@ -14,23 +26,14 @@ export async function GET(request) {
   const description = searchParams.get("description");
   const waterMarkImage = searchParams.get("bgImage");
 
+  const samiBold = await b;
+  const fontMedium = await m;
+
   const KALIBRE_FULL_NAME =
     "https://res.cloudinary.com/kalibre-ai/image/upload/v1715771480/icons/kalibre_logo_k41tiq.svg";
 
   const Arrow_Icon =
     "https://res.cloudinary.com/kalibre-ai/image/upload/v1716619650/icons/Arrow_03_e0di3w.svg";
-
-  const samiBold = await fetch(
-    new URL("../../../assets/FamiljenGrotesk-SemiBold.ttf", import.meta.url)
-  ).then((res) => res.arrayBuffer());
-
-  const regular = await fetch(
-    new URL("../../../assets/Gordita Regular.otf", import.meta.url)
-  ).then((res) => res.arrayBuffer());
-
-  const fontMedium = await fetch(
-    new URL("../../../assets/Inter-Medium .otf", import.meta.url)
-  ).then((res) => res.arrayBuffer());
 
   // try {
   return new ImageResponse(
@@ -153,11 +156,6 @@ export async function GET(request) {
         {
           name: "meduim",
           data: fontMedium,
-          style: "normal",
-        },
-        {
-          name: "regular",
-          data: regular,
           style: "normal",
         },
       ],
