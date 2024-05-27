@@ -1,8 +1,6 @@
 import { ImageResponse } from "@vercel/og";
 export const runtime = "edge";
 
-
-
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
 
@@ -19,8 +17,7 @@ export async function GET(request) {
   const samiBold = await fetch(
     new URL("../../../../assets/FamiljenGrotesk-SemiBold.ttf", import.meta.url)
   ).then((res) => res.arrayBuffer());
-  
-  
+
   const fontMedium = await fetch(
     new URL("../../../../assets/Inter-Medium .otf", import.meta.url)
   ).then((res) => res.arrayBuffer());
@@ -34,8 +31,7 @@ export async function GET(request) {
   const Arrow_Icon =
     "https://res.cloudinary.com/kalibre-ai/image/upload/v1716619650/icons/Arrow_03_e0di3w.svg";
 
-  // try {
-  return new ImageResponse(
+  const response = new ImageResponse(
     (
       <div
         style={{
@@ -160,7 +156,10 @@ export async function GET(request) {
       ],
     }
   );
-  // } catch (error) {
-  //   console.log("error ===", error);
-  // }
+
+  response.headers.set("Access-Control-Allow-Origin", "*");
+  response.headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  response.headers.set("Access-Control-Allow-Headers", "Content-Type");
+
+  return response;
 }
