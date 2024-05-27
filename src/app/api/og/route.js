@@ -31,7 +31,7 @@ export async function GET(request) {
   const Arrow_Icon =
     "https://res.cloudinary.com/kalibre-ai/image/upload/v1716619650/icons/Arrow_03_e0di3w.svg";
 
-  const response = new ImageResponse(
+  const imageResponse = new ImageResponse(
     (
       <div
         style={{
@@ -157,11 +157,24 @@ export async function GET(request) {
     }
   );
 
-  response.headers.set("Access-Control-Allow-Origin", "*");
-  response.headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  response.headers.set("Access-Control-Allow-Headers", "Content-Type");
+  // Convert the image response to a buffer
+  const imageBuffer = await imageResponse.arrayBuffer();
+  
+  // Encode the buffer to a base64 string
+  const base64Image = Buffer.from(imageBuffer).toString('base64');
 
-  return response;
+  // Return the image as a JSON response
+  return new Response(
+    JSON.stringify({ image: `data:image/png;base64,${base64Image}` }),
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+    }
+  );
 }
 
 
