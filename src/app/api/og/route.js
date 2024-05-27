@@ -163,3 +163,16 @@ export async function GET(request) {
 
   return response;
 }
+
+
+export async function OPTIONS(request) {
+  const headers = new Headers();
+  headers.set('Access-Control-Allow-Origin', '*');
+  headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  headers.set('Access-Control-Allow-Headers', 'Content-Type');
+  
+  return new Response(null, {
+    status: 204,
+    headers: headers,
+  });
+}
