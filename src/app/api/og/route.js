@@ -5,8 +5,8 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url);
 
   const size = {
-    width: 800,
-    height: 558,
+    width: 1200,
+    height: 630,
   };
 
   const secondaryHeading = searchParams.get("heading");
@@ -38,16 +38,15 @@ export async function GET(request) {
           display: "flex",
           height: "100%",
           width: "100%",
-          // backgroundImage: "linear-gradient(117deg, #FFECE2 -14.36%, #E7F4FF 52.04%, #F0CBF9 119.72%)",
+          // background: "linear-gradient(117deg, #FFECE2 -14.36%, #E7F4FF 52.04%, #F0CBF9 119.72%)",
           backgroundImage:
-            "linear-gradient(135deg, #fef5f1, #f0f8ff 48%, #faedfd)",
-          padding: "30px 35px",
+            "linear-gradient(135deg,#f9f5f3,#f3f6f9 51%,#f8f3f9)",
+          padding: "80px 50px",
           flexDirection: "column",
-          gap: "20px",
         }}
       >
         <div style={{ display: "flex" }}>
-          <img src={KALIBRE_FULL_NAME} alt="logo" width="130px" />
+          <img src={KALIBRE_FULL_NAME} alt="logo" width="140px" />
         </div>
 
         <div
@@ -70,7 +69,13 @@ export async function GET(request) {
             }}
           >
             {secondaryHeading && (
-              <h1 style={{ color: "#669AFB", fontWeight: 500 }}>
+              <h1
+                style={{
+                  color: "#3478F6",
+                  fontWeight: 500,
+                  fontSize: "2.5rem",
+                }}
+              >
                 {secondaryHeading}
               </h1>
             )}
@@ -78,12 +83,12 @@ export async function GET(request) {
             {primaryHeading && (
               <div
                 style={{
-                  fontSize: "3.5rem",
+                  fontSize: "5rem",
                   fontWeight: 600,
                   color: "#222222",
                   textWrap: "warap",
                   textShadow: "-3px 4px 5px #C4C4C4",
-                  lineHeight: "3.6rem",
+                  lineHeight: "5rem",
                   fontFamily: "samibold",
                   marginTop: "5px",
                 }}
@@ -96,7 +101,7 @@ export async function GET(request) {
             {description && (
               <p
                 style={{
-                  fontSize: "1.3rem",
+                  fontSize: "2rem",
                   color: "#717171",
                   fontWeight: 400,
                   lineHeight: "1.7",
@@ -121,7 +126,7 @@ export async function GET(request) {
               <img
                 src={waterMarkImage}
                 alt="logo"
-                width="180px"
+                width="230px"
                 style={{
                   opacity: "0.13",
                 }}
@@ -159,9 +164,9 @@ export async function GET(request) {
 
   // Convert the image response to a buffer
   const imageBuffer = await imageResponse.arrayBuffer();
-  
+
   // Encode the buffer to a base64 string
-  const base64Image = Buffer.from(imageBuffer).toString('base64');
+  const base64Image = Buffer.from(imageBuffer).toString("base64");
 
   // Return the image as a JSON response
   return new Response(
@@ -175,15 +180,16 @@ export async function GET(request) {
       },
     }
   );
-}
 
+  // return imageResponse
+}
 
 export async function OPTIONS(request) {
   const headers = new Headers();
-  headers.set('Access-Control-Allow-Origin', '*');
-  headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  headers.set('Access-Control-Allow-Headers', 'Content-Type');
-  
+  headers.set("Access-Control-Allow-Origin", "*");
+  headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  headers.set("Access-Control-Allow-Headers", "Content-Type");
+
   return new Response(null, {
     status: 204,
     headers: headers,
