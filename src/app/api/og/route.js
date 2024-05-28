@@ -126,7 +126,7 @@ export async function GET(request) {
                   opacity: "0.13",
                 }}
               />
-              <img
+              {/* <img
                 src={Arrow_Icon}
                 alt="logo"
                 width="120px"
@@ -134,7 +134,7 @@ export async function GET(request) {
                   opacity: "0.07",
                   marginTop: "40px",
                 }}
-              />
+              /> */}
             </div>
           )}
         </div>
