@@ -1,5 +1,6 @@
 import { ImageResponse } from "@vercel/og";
 export const runtime = "edge";
+export const contentType = "image/jpg";
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -168,18 +169,29 @@ export async function GET(request) {
   // Encode the buffer to a base64 string
   const base64Image = Buffer.from(imageBuffer).toString("base64");
 
+  // const url = "http://192.168.0.118:3000/api/convertPngToJpg";
+
+  const url = "https://ogimage-creation.vercel.app/api/convertPngToJpg";
+
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ image: `data:image/png;base64,${base64Image}` }),
+  });
+
+  const result = await response.json();
+
+  // console.log("----------------------------response--------------------",result)
   // Return the image as a JSON response
-  return new Response(
-    JSON.stringify({ image: `data:image/png;base64,${base64Image}` }),
-    {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
-      },
-    }
-  );
+  return new Response(JSON.stringify(result), {
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    },
+  });
 
   // return imageResponse
 }
