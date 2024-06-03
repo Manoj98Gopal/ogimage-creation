@@ -14,6 +14,9 @@ export async function GET(request) {
   const primaryHeading = searchParams.get("subHeading");
   const description = searchParams.get("description");
   const waterMarkImage = searchParams.get("bgImage");
+  const cmpLogo = searchParams.get("cmp_logo");
+
+  console.log("cmp logo ===", cmpLogo);
 
   const samiBold = await fetch(
     new URL("../../../../assets/FamiljenGrotesk-SemiBold.ttf", import.meta.url)
@@ -46,10 +49,6 @@ export async function GET(request) {
           flexDirection: "column",
         }}
       >
-        <div style={{ display: "flex" }}>
-          <img src={KALIBRE_FULL_NAME} alt="logo" width="140px" />
-        </div>
-
         <div
           style={{
             display: "flex",
@@ -57,7 +56,7 @@ export async function GET(request) {
             alignItems: "flex-start",
             justifyContent: "space-between",
             flexWrap: "nowrap",
-            marginTop: "40px",
+            marginTop: "20px",
           }}
         >
           <div
@@ -81,21 +80,45 @@ export async function GET(request) {
               </h1>
             )}
 
-            {primaryHeading && (
+            {(cmpLogo || primaryHeading) && (
               <div
                 style={{
-                  fontSize: "5rem",
-                  fontWeight: 600,
-                  color: "#222222",
-                  textWrap: "warap",
-                  textShadow: "-3px 4px 5px #C4C4C4",
-                  lineHeight: "5rem",
-                  fontFamily: "samibold",
-                  marginTop: "5px",
+                  display: "flex",
+                  gap: "30px",
+                  alignItems: "center",
                 }}
-                // tw="text-6xl font-black"
               >
-                {primaryHeading}
+                {cmpLogo && (
+                  <div style={{ display: "flex" }}>
+                    <img
+                      src={cmpLogo}
+                      alt="logo"
+                      style={{
+                        width: "65px",
+                        height: "65px",
+                        borderRadius: "10px",
+                      }}
+                    />
+                  </div>
+                )}
+
+                {primaryHeading && (
+                  <div
+                    style={{
+                      fontSize: "5rem",
+                      fontWeight: 600,
+                      color: "#222222",
+                      textWrap: "warap",
+                      textShadow: "-3px 4px 5px #C4C4C4",
+                      lineHeight: "5rem",
+                      fontFamily: "samibold",
+                      // marginTop: "5px",
+                    }}
+                    // tw="text-6xl font-black"
+                  >
+                    {primaryHeading}
+                  </div>
+                )}
               </div>
             )}
 
@@ -132,15 +155,13 @@ export async function GET(request) {
                   opacity: "0.13",
                 }}
               />
-              {/* <img
-                src={Arrow_Icon}
+
+              <img
+                src={KALIBRE_FULL_NAME}
                 alt="logo"
-                width="120px"
-                style={{
-                  opacity: "0.07",
-                  marginTop: "40px",
-                }}
-              /> */}
+                width="100px"
+                style={{ margin: "180px 0px 0px 130px" }}
+              />
             </div>
           )}
         </div>
@@ -173,7 +194,6 @@ export async function GET(request) {
 
   const url = "https://ogimage-creation.vercel.app/api/convertPngToJpg";
 
-
   const response = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -182,7 +202,6 @@ export async function GET(request) {
 
   const result = await response.json();
 
-  // console.log("----------------------------response--------------------",result)
   // Return the image as a JSON response
   return new Response(JSON.stringify(result), {
     headers: {
@@ -193,7 +212,7 @@ export async function GET(request) {
     },
   });
 
-  // return imageResponse
+  // return imageResponse;
 }
 
 export async function OPTIONS(request) {
